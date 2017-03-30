@@ -1,0 +1,88 @@
+<div
+     ng-cloak
+     layout="column">
+
+    <md-sidenav layout="column" class="md-sidenav-right md-whiteframe-z2"
+                layout="row"
+                style="max-width:50%"    
+                data-ng-include=" 'views/agency/reservationForm.html' "
+                md-component-id="newSchedule" layout-fill>
+    </md-sidenav>
+
+    <md-sidenav layout="column" class="md-sidenav-left md-whiteframe-z2"
+                layout="row"
+                style="max-width:50%"
+                data-ng-include=" 'views/agency/reservationForm2.html' "
+                md-component-id="pickProducts" layout-fill>
+    </md-sidenav>
+
+    <md-toolbar layout="row">
+        <div class="md-toolbar-tools">
+            <h1 flex>{{localize.getLocalizedString('_Scheduler_')}}</h1>
+            <md-button class="md-icon-button" ng-click="openNewSchedule()">
+                <md-icon md-svg-icon="library-plus"></md-icon>
+            </md-button>
+            <md-button class="md-icon-button" ng-click="openSettings()">
+                <md-icon md-svg-icon="settings"></md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+
+    <div layout="row" layout-fill flex>
+        <h2 flex layout-padding layout-margin>{{ calendarTitle }}</h2>
+
+        <md-toolbar layout="row" flex="20" layout-align="space-around center">
+            <md-button
+                    calendar-date-modifier
+                    date="currentDay"
+                    aria-label="Prev"
+                    decrement="calendarView">
+                <md-icon md-svg-icon="chevron-left"></md-icon>
+            </md-button>
+            <md-button calendar-date-modifier
+                       aria-label="Today"
+                       date="currentDay"
+                       set-to-today>{{localize.getLocalizedString('_Today_')}}
+            </md-button>
+            <md-button
+                    calendar-date-modifier
+                    aria-label="Next"
+                    date="currentDay"
+                    increment="calendarView">
+                <md-icon md-svg-icon="chevron-right"></md-icon>
+            </md-button>
+        </md-toolbar>
+
+        <md-radio-group ng-model="calendarView" layout="row" layout-align="end start" flex>
+            <md-radio-button class="md-primary" ng-value="'month'">{{localize.getLocalizedString('_Month_')}}</md-radio-button>
+            <md-radio-button class="md-primary" ng-value="'week'">{{localize.getLocalizedString('_Week_')}}</md-radio-button>
+            <md-radio-button class="md-primary" ng-value="'day'">{{localize.getLocalizedString('_Day_')}}</md-radio-button>
+        </md-radio-group>
+    </div>
+    <div flex layout-fill style="min-height: 20px"></div>
+
+    <div layout="row">
+        
+        <main-calendar
+                layout="row"
+                flex
+                layout-fill
+                layout-margin
+                layout-padding
+                events="events"
+                view="calendarView"
+                view-title="calendarTitle"
+                current-day="currentDay"
+                on-event-click="eventClicked(calendarEvent)"
+                edit-event-html="'<i class=\'glyphicon glyphicon-pencil\'></i>'"
+                delete-event-html="'<i class=\'glyphicon glyphicon-remove\'></i>'"
+                on-edit-event-click="eventEdited(calendarEvent)"
+                on-delete-event-click="eventDeleted(calendarEvent)"
+                on-drill-down-click="eventDrillDownClick(calendarEvent)"
+                auto-open="true"
+                day-view-start="10:00"
+                day-view-end="23:00"
+                day-view-split="30">
+        </main-calendar>
+    </div>
+</div>

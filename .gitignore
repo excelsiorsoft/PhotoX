@@ -1,0 +1,10 @@
+/.settings
+.project
+.classpath
+.springBeans
+/bin
+/target
+/static
+notes.txt
+.idea
+.DS_Store
